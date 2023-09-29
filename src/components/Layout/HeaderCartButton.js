@@ -1,15 +1,12 @@
 import CartIcon from "../Cart/CartIcon";
 import classes from './HeaderCartButton.module.css';
-import { useContext } from "react";
-import CartContext from "../../store/cart-context";
 import { useState, useEffect } from "react";
 
-const HeaderCartButton=(props)=>{
+const HeaderCartButton = (props) => {
     const [numberOfItems, setNumberOfItems] = useState(0);
 
     useEffect(() => {
-        // Make an API request to your database to fetch cart data
-        fetch('https://medical-50953-default-rtdb.europe-west1.firebasedatabase.app/cart.json') // Replace with your actual database URL
+        fetch('https://medical-50953-default-rtdb.europe-west1.firebasedatabase.app/cartItem.json') 
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch cart data');
@@ -17,10 +14,10 @@ const HeaderCartButton=(props)=>{
                 return response.json();
             })
             .then((data) => {
-                // Calculate the total number of items in the cart
+                console.log('Fetched data:', data);
                 let totalItems = 0;
-                for (const itemId in data.items) {
-                    totalItems += data.items[itemId].amount;
+                for (const itemId in data) {
+                    totalItems += data[itemId].amount;
                 }
                 setNumberOfItems(totalItems);
             })

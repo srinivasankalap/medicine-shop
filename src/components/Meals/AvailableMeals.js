@@ -3,15 +3,12 @@ import Card from '../UI/Card';
 import MealItem from './MealItem/MealItem';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import CartContext from '../../store/cart-context';
-import { useContext } from 'react';
 
 const AvailabeMeals=(props)=>{
   const [meals, setMeals] = useState([]);
   
   useEffect(() => {
-    // Make a fetch request to your database to fetch meal data
-    fetch('https://medical-50953-default-rtdb.europe-west1.firebasedatabase.app/cart.json') // Replace with your actual database URL
+    fetch('https://medical-50953-default-rtdb.europe-west1.firebasedatabase.app/cart.json') 
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch meal data');
@@ -19,7 +16,6 @@ const AvailabeMeals=(props)=>{
         return response.json();
       })
       .then((data) => {
-        // Assuming your database structure is an object with meal IDs as keys
         const loadedMeals = [];
         for (const mealId in data) {
           loadedMeals.push({

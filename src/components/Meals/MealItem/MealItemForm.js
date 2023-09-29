@@ -9,6 +9,7 @@ const MealItemForm=(props)=>{
 
     const submitting=(e)=>{
         e.preventDefault();
+        console.log('Clicked')
         const enteredAmount= amountRef.current.value;
         const enteredAmountNumber=+enteredAmount;
 
@@ -30,7 +31,7 @@ const MealItemForm=(props)=>{
                 step: '1',
                 defaultValue: '1',
             }} />
-            <button>Add Item</button>
+            <button type='submit'>Add Item</button>
             {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
         </form>
     )
